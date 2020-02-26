@@ -5,7 +5,6 @@ import Login from './pages/Login'
 import './App.css';
 
 function App() {
-
    const theme = createMuiTheme({
       palette: {
          type: 'dark',

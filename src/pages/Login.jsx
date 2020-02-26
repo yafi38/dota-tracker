@@ -1,48 +1,33 @@
 import React, { useState } from 'react';
-import { StylesProvider } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
+import axios from 'axios';
 
+
+import Form from '../components/Form'
 import './Login.css';
 
 
 function Login() {
-   const [id, setId] = useState("");
-
-   function handleChange(event) {
-      //console.log(event.target.value);
-      setId(event.target.value);
-   }
-
-   function handleClick(event) {
-      event.preventDefault();
-      console.log(id);
+   async function onSubmitHandler(id) {
+      localStorage.setItem('id', id);
+      try {
+         const response = await axios.get(`https://api.opendota.com/api/players/${id}`);
+         if (response.data.profile)
+            console.log(response);
+         else console.log("could not find user");
+      } catch (error) {
+         console.log(error);
+      }
+      //console.log(localStorage.getItem('id'));
    }
 
    return (
-      <StylesProvider injectFirst>
-         <div>
-            <h1>Welcome to DOTA 2 Tracker</h1>
+      <div>
+         <img src="https://www.pinclipart.com/picdir/big/352-3520682_dota-2-logo-png-clipart.png"
+            alt="dota-logo" height="200" width="200" />
+         <h1>Welcome to DOTA 2 Tracker</h1>
 
-            <form className='my-form' onSubmit={handleClick} >
-               {/* <input
-               onChange={handleChange}
-               type="text"
-               placeholder="Enter DOTA 2 user id"
-               value={id}
-            /> */}
-               <TextField classes={{ root: 'my-text' }} id="standard-basic" label="User ID" onChange={handleChange} placeholder="Enter DOTA 2 user id"
-                  value={id} autoComplete="off" />
-               <br/>
-               <Button
-                  classes={{ root: 'my-btn' }}
-                  size="small" variant="contained" color="primary"
-                  type="submit" disableElevation >
-                  Submit
-               </Button>
-            </form>
-         </div>
-      </StylesProvider>
+         <Form onSubmit={onSubmitHandler} />
+      </div>
    );
 }
 

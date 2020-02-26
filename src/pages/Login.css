@@ -1,7 +1,10 @@
-.my-text {
-   margin: 20px 0;
+div {
+   margin-top: 150px;
 }
 
-div {
-   margin-top: 200px;
+@media (max-height: 800px)
+{
+   div {
+      margin-top: 50px;
+   }
 }
