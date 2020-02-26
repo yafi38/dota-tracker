@@ -21,9 +21,9 @@ function Login() {
    }
 
    return (
-      <div>
+      <div className="page-body">
          <img src="https://www.pinclipart.com/picdir/big/352-3520682_dota-2-logo-png-clipart.png"
-            alt="dota-logo" height="200" width="200" />
+            alt="dota-logo" />
          <h1>Welcome to DOTA 2 Tracker</h1>
 
          <Form onSubmit={onSubmitHandler} />

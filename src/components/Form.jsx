@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
-import { StylesProvider } from '@material-ui/core/styles';
+import { StylesProvider, makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 
 import './Form.css';
+
+const useStyles = makeStyles (theme => ({
+   myBtn: {
+      backgroundColor: "#B90506"
+   }
+}));
 
 function Form(props) {
    const [id, setId] = useState("");
@@ -17,6 +23,9 @@ function Form(props) {
       event.preventDefault();
       props.onSubmit(id);
    }
+
+   const classes = useStyles();
+
    return (
       <StylesProvider injectFirst>
          <form className='my-form' onSubmit={clickHandler} >
@@ -24,8 +33,9 @@ function Form(props) {
                value={id} autoComplete="off" />
             <br />
             <Button
-               classes={{ root: 'my-btn' }}
-               size="small" variant="contained" color="primary"
+               className={classes.myBtn}
+               color="primary"
+               variant="contained"
                type="submit" disableElevation >
                Submit
          </Button>
