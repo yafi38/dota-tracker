@@ -6,7 +6,7 @@ import './Home.css';
 function Home() {
   return (
     <div>
-      
+      <h1>Hi Home!</h1>
     </div>
   );
 }

@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 
-
-import Form from '../components/Form'
+import AuthContext from '../components/AuthContext';
+import Form from '../components/Form';
 import './Login.css';
 
 
 function Login() {
+   const auth = useContext(AuthContext);
    async function onSubmitHandler(id) {
       localStorage.setItem('id', id);
       try {
          const response = await axios.get(`https://api.opendota.com/api/players/${id}`);
-         if (response.data.profile)
+         if (response.data.profile) {
             console.log(response);
+            auth.login();
+         }
          else console.log("could not find user");
       } catch (error) {
          console.log(error);
